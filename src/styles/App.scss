@@ -1,0 +1,215 @@
+// App Stylesheet with 3D Effects
+$primary-blue: #0a2a43;
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--color-bg-primary);
+  overflow-x: hidden;
+  position: relative;
+  perspective: 2000px;
+  perspective-origin: 50% 50%;
+  transform-style: preserve-3d;
+  transition: background-color 0.3s ease;
+  
+  // Mobile optimizations
+  @media (max-width: 768px) {
+    perspective: 1000px;
+    overflow: auto;
+  }
+  
+  @media (max-width: 480px) {
+    perspective: none;
+    transform-style: flat;
+  }
+  
+  // Low-end device optimizations
+  @media (max-width: 320px) {
+    font-size: 14px;
+  }
+
+  // 3D ambient lighting effect
+  &::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle at 50% 50%,
+      rgba(255, 215, 0, 0.05) 0%,
+      transparent 50%
+    );
+    pointer-events: none;
+    z-index: 5;
+    animation: ambientRotate 30s linear infinite;
+  }
+}
+
+@keyframes ambientRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.main-content {
+  width: 100%;
+  min-height: calc(100vh - 80px);
+  padding-top: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  position: relative;
+  z-index: 10;
+  transform-style: preserve-3d;
+  transform: translateZ(0);
+  transition: background-color 0.3s ease;
+  padding-left: 0;
+  padding-right: 0;
+
+  // 3D depth layers
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.2) 0%,
+      transparent 20%,
+      transparent 80%,
+      rgba(0, 0, 0, 0.3) 100%
+    );
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  @media (max-width: 768px) {
+    padding-top: 70px;
+    min-height: calc(100vh - 70px);
+    padding-left: 0;
+    padding-right: 0;
+    transform-style: flat;
+  }
+
+  @media (max-width: 480px) {
+    padding-top: 60px;
+    min-height: calc(100vh - 60px);
+    padding-left: 0;
+    padding-right: 0;
+    transform: none;
+  }
+  
+  @media (max-width: 320px) {
+    padding-top: 55px;
+    min-height: calc(100vh - 55px);
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transform: none;
+  }
+}
+
+// Global responsive typography
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+// Reset default button styles
+button {
+  font-family: inherit;
+  font-size: inherit;
+  outline: none;
+}
+
+button:focus {
+  outline: 2px solid #ffd700;
+  outline-offset: 2px;
+}
+
+// Responsive App Logo
+.app-logo {
+  position: fixed;
+  z-index: 9999;
+
+  // Mobile (up to 480px)
+  top: 15px;
+  left: 15px;
+  width: 120px;
+
+  img {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7));
+    transition: filter 0.3s ease;
+  }
+
+  // Tablet (481px - 768px)
+  @media (min-width: 481px) and (max-width: 768px) {
+    top: 20px;
+    left: 20px;
+    width: 150px;
+  }
+
+  // Desktop (769px - 1439px)
+  @media (min-width: 769px) and (max-width: 1439px) {
+    top: 30px;
+    left: 30px;
+    width: 200px;
+  }
+
+  // Wide/TV screens (1440px - 1919px)
+  @media (min-width: 1440px) and (max-width: 1919px) {
+    top: 40px;
+    left: 40px;
+    width: 240px;
+
+    img {
+      filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.7));
+    }
+  }
+
+  // Ultra-wide/4K screens (1920px+)
+  @media (min-width: 1920px) {
+    top: 50px;
+    left: 50px;
+    width: 280px;
+
+    img {
+      filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.8));
+    }
+  }
+
+  // Very small mobile devices (320px and below)
+  @media (max-width: 320px) {
+    top: 10px;
+    left: 10px;
+    width: 100px;
+
+    img {
+      filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.6));
+    }
+  }
+}

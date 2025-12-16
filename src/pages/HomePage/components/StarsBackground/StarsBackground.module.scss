@@ -1,0 +1,54 @@
+/* ============================================
+   STARS BACKGROUND COMPONENT STYLES
+   ============================================ */
+
+.starsBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #001a33 0%, #000814 50%, #000000 100%);
+  overflow: hidden;
+
+  // Mobile vertical layout
+  @media (max-width: 768px) {
+    position: relative;
+    height: auto;
+    min-height: 100vh;
+  }
+}
+
+.star {
+  position: absolute;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+  animation: starShine infinite ease-in-out;
+  opacity: 0;
+}
+
+@keyframes starShine {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .star {
+    // Reduce star count visually on smaller screens by making them slightly smaller
+    box-shadow: 0 0 3px rgba(255, 255, 255, 0.7);
+  }
+}
+
+@media (max-width: 480px) {
+  .star {
+    box-shadow: 0 0 2px rgba(255, 255, 255, 0.6);
+  }
+}

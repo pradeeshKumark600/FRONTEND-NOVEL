@@ -1,0 +1,130 @@
+/* ============================================
+   SOCIAL ICONS COMPONENT STYLES
+   ============================================ */
+
+.socialIcons {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 60px;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  flex-wrap: wrap;
+
+  // Ultra-low-end devices (320px - 360px)
+  @media (max-width: 360px) {
+    gap: 12px;
+    max-width: 90%;
+    width: 100%;
+  }
+
+  // Low-end devices (361px - 480px)
+  @media (max-width: 480px) {
+    gap: 15px;
+    max-width: 90%;
+    width: 100%;
+  }
+
+  // Tablets (481px - 768px)
+  @media (min-width: 481px) and (max-width: 768px) {
+    gap: 25px;
+    flex-wrap: wrap;
+  }
+
+  // Standard tablets (769px - 849px)
+  @media (min-width: 769px) and (max-width: 849px) {
+    gap: 40px;
+    flex-wrap: nowrap;
+  }
+
+  // Medium tablets (850px - 1023px)
+  @media (min-width: 850px) and (max-width: 1023px) {
+    gap: 50px;
+    flex-wrap: nowrap;
+  }
+
+  // Desktop
+  @media (min-width: 1024px) {
+    gap: 60px;
+    flex-wrap: nowrap;
+  }
+
+  @media (min-width: 1440px) {
+    gap: 80px;
+  }
+
+  @media (min-width: 1920px) {
+    gap: 100px;
+  }
+}
+
+.socialIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  opacity: 0.9;
+  transform: scale(1);
+  cursor: pointer;
+
+  &:hover {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  img {
+    width: 80px;
+    height: 80px;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+    object-fit: contain;
+
+    // Ultra-low-end (320px - 360px)
+    @media (max-width: 360px) {
+      width: 38px;
+      height: 38px;
+      filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.4));
+    }
+
+    // Low-end (361px - 480px)
+    @media (max-width: 480px) {
+      width: 44px;
+      height: 44px;
+      filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.4));
+    }
+
+    // Tablets (481px - 768px)
+    @media (min-width: 481px) and (max-width: 768px) {
+      width: 56px;
+      height: 56px;
+    }
+
+    // Standard tablets (769px - 849px)
+    @media (min-width: 769px) and (max-width: 849px) {
+      width: 65px;
+      height: 65px;
+    }
+
+    // Medium tablets (850px - 1023px)
+    @media (min-width: 850px) and (max-width: 1023px) {
+      width: 75px;
+      height: 75px;
+    }
+
+    @media (min-width: 1440px) {
+      width: 100px;
+      height: 100px;
+    }
+
+    @media (min-width: 1920px) {
+      width: 120px;
+      height: 120px;
+    }
+  }
+}
