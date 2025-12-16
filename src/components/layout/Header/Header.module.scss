@@ -1,0 +1,860 @@
+.header {
+  background: #0B1A2D;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.75rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 0;
+  overflow: visible;
+
+  // Star shining effect
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 215, 0, 0.5) 50%, transparent 100%);
+    transform: translateX(-100%);
+    animation: shine 3s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 10;
+  }
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: 1.75cm; // 1.75cm gap between hamburger and logo
+  flex-shrink: 0;
+}
+
+// Hamburger Menu
+.hamburger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0.5rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  span {
+    width: 25px;
+    height: 3px;
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    box-shadow:
+      0 2px 8px rgba(255, 215, 0, 0.4),
+      0 0 15px rgba(255, 215, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+
+  &.active {
+    span:nth-child(1) {
+      transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    span:nth-child(2) {
+      opacity: 0;
+    }
+
+    span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+  }
+}
+
+// Logo
+.logoContainer {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 130px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+// Center Section
+.centerSection {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex: 1;
+  justify-content: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+// Search Form
+.searchForm {
+  flex: 1;
+  max-width: 450px;
+}
+
+.searchContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 1rem;
+  width: 20px;
+  height: 20px;
+  color: #a8b2d1;
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 3rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 25px;
+  color: #fff;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+
+  &::placeholder {
+    color: #a8b2d1;
+  }
+
+  &:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 107, 107, 0.5);
+    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+  }
+}
+
+// Language Selector
+.languageSelector {
+  position: relative;
+  flex-shrink: 0;
+  z-index: 1001;
+}
+
+.languageButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+.languageIcon {
+  width: 20px;
+  height: 20px;
+  color: #feca57;
+}
+
+.languageText {
+  font-weight: 500;
+}
+
+.dropdownArrow {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+
+  &.open {
+    transform: rotate(180deg);
+  }
+}
+
+// Language Dropdown
+.languageDropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  background: #0B1A2D;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 0.5rem;
+  min-width: 150px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.2s ease;
+  z-index: 9999;
+  pointer-events: auto;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.languageOption {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+  text-align: left;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  &.active {
+    background: rgba(255, 107, 107, 0.15);
+    color: #ff6b6b;
+    font-weight: 600;
+  }
+}
+
+.languageLabel {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+// Theme Toggle Button
+.themeToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: rotate(20deg);
+  }
+
+  &:active {
+    transform: scale(0.95) rotate(0deg);
+  }
+}
+
+.themeIcon {
+  width: 22px;
+  height: 22px;
+  transition: transform 0.3s ease;
+}
+
+// Mobile Menu
+.mobileMenu {
+  background: #0B1A2D;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem 2rem;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+
+  &:hover {
+    background: rgba(255, 215, 0, 0.1);
+    color: #ffd700;
+    transform: translateX(5px);
+  }
+}
+
+.navIcon {
+  width: 22px;
+  height: 22px;
+  color: #ffd700;
+  filter: drop-shadow(0 2px 4px rgba(255, 215, 0, 0.4));
+  transition: all 0.3s ease;
+
+  .navLink:hover & {
+    transform: scale(1.1);
+    filter: drop-shadow(0 4px 8px rgba(255, 215, 0, 0.6));
+  }
+}
+
+// Right Section - Notification & User Login Icons
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-right: 2cm; // 2cm gap from right corner
+  flex-shrink: 0;
+}
+
+// Glassmorphism 3D Jewel Golden Icon Style
+.notificationIcon,
+.userLoginIcon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 237, 78, 0.15) 100%);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow:
+    0 8px 32px rgba(255, 215, 0, 0.25),
+    0 2px 8px rgba(255, 215, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+
+  // 3D effect
+  transform: perspective(1000px) translateZ(0);
+
+  svg {
+    width: 24px;
+    height: 24px;
+    color: #ffd700;
+    filter: drop-shadow(0 2px 4px rgba(255, 215, 0, 0.5));
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+  }
+
+  // Shine effect
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, transparent 60%);
+    border-radius: 50%;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+  }
+
+  // Glow effect
+  &::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0;
+    filter: blur(15px);
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover {
+    transform: perspective(1000px) translateZ(10px) scale(1.1);
+    box-shadow:
+      0 12px 48px rgba(255, 215, 0, 0.4),
+      0 4px 16px rgba(255, 215, 0, 0.5),
+      inset 0 2px 0 rgba(255, 255, 255, 0.4),
+      inset 0 -2px 0 rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 215, 0, 0.5);
+
+    svg {
+      transform: scale(1.1);
+      filter: drop-shadow(0 4px 8px rgba(255, 215, 0, 0.7));
+    }
+
+    &::after {
+      opacity: 0.6;
+    }
+  }
+
+  &:active {
+    transform: perspective(1000px) translateZ(5px) scale(1.05);
+    box-shadow:
+      0 6px 24px rgba(255, 215, 0, 0.3),
+      0 2px 8px rgba(255, 215, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+}
+
+// Animation for icons
+@keyframes shimmer {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+// Responsive Design
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  .leftSection {
+    gap: 1rem;
+  }
+
+  .logo {
+    height: 100px;
+  }
+
+  .rightSection {
+    margin-right: 1rem;
+    gap: 0.75rem;
+  }
+
+  .searchInput {
+    font-size: 0.9rem;
+    padding: 0.7rem 1rem 0.7rem 2.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 0.5rem 0;
+  }
+
+  .container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0 0.75rem;
+  }
+
+  .leftSection {
+    width: auto;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    flex: 0 0 auto;
+  }
+
+  .logo {
+    height: 50px;
+  }
+
+  .centerSection {
+    order: 3;
+    width: 100%;
+    max-width: 100%;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    margin: 0;
+  }
+
+  .searchForm {
+    flex: 1;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .searchInput {
+    font-size: 0.8rem;
+    padding: 0.55rem 0.75rem 0.55rem 2.25rem;
+  }
+
+  .searchIcon {
+    left: 0.65rem;
+    width: 16px;
+    height: 16px;
+  }
+
+  .languageButton {
+    padding: 0.45rem 0.7rem;
+    font-size: 0.75rem;
+  }
+
+  .languageIcon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .themeToggle {
+    width: 36px;
+    height: 36px;
+  }
+
+  .themeIcon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .rightSection {
+    order: 2;
+    margin-right: 0;
+    margin-left: auto;
+    gap: 0.5rem;
+  }
+
+  .notificationIcon,
+  .userLoginIcon {
+    width: 36px;
+    height: 36px;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  .mobileMenu {
+    padding: 1rem 1.5rem;
+  }
+
+  .navLink {
+    padding: 0.65rem 0.85rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 0.35rem 0;
+  }
+
+  .container {
+    padding: 0 0.6rem;
+    gap: 0.4rem;
+  }
+
+  .leftSection {
+    gap: 0.4rem;
+  }
+
+  .hamburger {
+    padding: 0.3rem;
+
+    span {
+      width: 20px;
+      height: 2.5px;
+    }
+  }
+
+  .logo {
+    height: 45px;
+  }
+
+  .searchInput {
+    font-size: 0.75rem;
+    padding: 0.5rem 0.6rem 0.5rem 2rem;
+  }
+
+  .searchIcon {
+    left: 0.6rem;
+    width: 14px;
+    height: 14px;
+  }
+
+  .languageButton {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.7rem;
+    gap: 0.3rem;
+  }
+
+  .languageIcon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .dropdownArrow {
+    width: 12px;
+    height: 12px;
+  }
+
+  .languageDropdown {
+    min-width: 120px;
+    padding: 0.35rem;
+  }
+
+  .languageOption {
+    padding: 0.6rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .themeToggle {
+    width: 34px;
+    height: 34px;
+    padding: 0.35rem;
+  }
+
+  .themeIcon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .rightSection {
+    gap: 0.4rem;
+  }
+
+  .notificationIcon,
+  .userLoginIcon {
+    width: 34px;
+    height: 34px;
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  .mobileMenu {
+    padding: 0.85rem 1rem;
+  }
+
+  .navLink {
+    padding: 0.6rem 0.75rem;
+    font-size: 0.9rem;
+    gap: 0.75rem;
+  }
+
+  .navIcon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+// Modern mobile devices (390-430px)
+@media (max-width: 430px) and (min-width: 361px) {
+  .header {
+    padding: 0.35rem 0;
+  }
+
+  .container {
+    padding: 0 0.65rem;
+    gap: 0.4rem;
+  }
+
+  .leftSection {
+    gap: 0.4rem;
+  }
+
+  .hamburger {
+    padding: 0.3rem;
+
+    span {
+      width: 19px;
+      height: 2.5px;
+    }
+  }
+
+  .logo {
+    height: 42px;
+  }
+
+  .centerSection {
+    gap: 0.45rem;
+  }
+
+  .searchInput {
+    font-size: 0.72rem;
+    padding: 0.48rem 0.65rem 0.48rem 1.95rem;
+  }
+
+  .searchIcon {
+    left: 0.55rem;
+    width: 13px;
+    height: 13px;
+  }
+
+  .languageButton {
+    padding: 0.38rem 0.58rem;
+    font-size: 0.68rem;
+  }
+
+  .languageIcon {
+    width: 13px;
+    height: 13px;
+  }
+
+  .dropdownArrow {
+    width: 11px;
+    height: 11px;
+  }
+
+  .themeToggle {
+    width: 33px;
+    height: 33px;
+  }
+
+  .themeIcon {
+    width: 15px;
+    height: 15px;
+  }
+
+  .rightSection {
+    gap: 0.4rem;
+  }
+
+  .notificationIcon,
+  .userLoginIcon {
+    width: 33px;
+    height: 33px;
+
+    svg {
+      width: 15px;
+      height: 15px;
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    padding: 0 0.5rem;
+    gap: 0.35rem;
+  }
+
+  .leftSection {
+    gap: 0.35rem;
+  }
+
+  .hamburger {
+    padding: 0.25rem;
+
+    span {
+      width: 18px;
+      height: 2px;
+    }
+  }
+
+  .logo {
+    height: 40px;
+  }
+
+  .searchInput {
+    font-size: 0.7rem;
+    padding: 0.45rem 0.6rem 0.45rem 1.9rem;
+  }
+
+  .searchIcon {
+    left: 0.5rem;
+    width: 13px;
+    height: 13px;
+  }
+
+  .languageButton {
+    padding: 0.35rem 0.55rem;
+    font-size: 0.65rem;
+  }
+
+  .languageIcon {
+    width: 13px;
+    height: 13px;
+  }
+
+  .themeToggle {
+    width: 32px;
+    height: 32px;
+    padding: 0.3rem;
+  }
+
+  .themeIcon {
+    width: 15px;
+    height: 15px;
+  }
+
+  .rightSection {
+    gap: 0.35rem;
+  }
+
+  .notificationIcon,
+  .userLoginIcon {
+    width: 32px;
+    height: 32px;
+
+    svg {
+      width: 15px;
+      height: 15px;
+    }
+  }
+}

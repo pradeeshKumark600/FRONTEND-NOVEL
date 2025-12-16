@@ -1,0 +1,159 @@
+/* ============================================
+   IMAGE CAROUSEL COMPONENT STYLES
+   ============================================ */
+
+// Carousel images
+.carouselImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1.5s ease-in-out, visibility 1.5s ease-in-out;
+  will-change: opacity;
+
+  // Ensure proper rendering
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+
+  &.activeImage {
+    opacity: 1 !important;
+    visibility: visible !important;
+    animation: kenBurnsEffect 5s ease-in-out infinite !important;
+  }
+
+  // Ultra-low-end optimization
+  @media (max-width: 360px) {
+    background-attachment: scroll;
+    background-size: cover;
+    background-position: center center;
+  }
+
+  // Mobile optimization
+  @media (max-width: 480px) {
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+    height: 0;
+    min-height: 0;
+    display: none;
+
+    &.activeImage {
+      display: block;
+      height: 40vh;
+      min-height: 250px;
+    }
+  }
+
+  // Tablet optimization
+  @media (min-width: 481px) and (max-width: 768px) {
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+    height: 0;
+    min-height: 0;
+    display: none;
+
+    &.activeImage {
+      display: block;
+      height: 50vh;
+      min-height: 300px;
+    }
+  }
+}
+
+// Ken Burns Effect (Zoom In → Zoom Out) - Desktop
+@keyframes kenBurnsEffect {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+// Mobile Ken Burns - Lighter effect
+@keyframes kenBurnsEffectMobile {
+  0% {
+    transform: scale(1.05);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+// Ultra-low-end Ken Burns - Minimal effect
+@keyframes kenBurnsEffectLowEnd {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+// Ultra-low-end devices (320px - 360px)
+@media (max-width: 360px) {
+  .carouselImage {
+    background-size: cover;
+    background-position: center;
+
+    &.activeImage {
+      animation: kenBurnsEffectLowEnd 4s ease-in-out infinite !important;
+    }
+  }
+}
+
+// Low-end mobile (361px - 480px)
+@media (max-width: 480px) {
+  .carouselImage {
+    background-size: cover;
+    background-position: center center;
+
+    &.activeImage {
+      animation: kenBurnsEffectMobile 4s ease-in-out infinite !important;
+    }
+  }
+}
+
+// Tablets (481px - 768px)
+@media (min-width: 481px) and (max-width: 768px) {
+  .carouselImage {
+    &.activeImage {
+      animation: kenBurnsEffectMobile 4.5s ease-in-out infinite !important;
+    }
+  }
+}
+
+// Standard tablets (769px - 849px)
+@media (min-width: 769px) and (max-width: 849px) {
+  .carouselImage {
+    &.activeImage {
+      animation: kenBurnsEffect 4.8s ease-in-out infinite !important;
+    }
+  }
+}
+
+// Medium tablets (850px - 1023px)
+@media (min-width: 850px) and (max-width: 1023px) {
+  .carouselImage {
+    &.activeImage {
+      animation: kenBurnsEffect 5s ease-in-out infinite !important;
+    }
+  }
+}
