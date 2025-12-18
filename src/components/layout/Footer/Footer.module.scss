@@ -67,13 +67,16 @@
 }
 
 .footerLeft {
-  position: absolute;
-  left: calc(50% - 20cm);
-  top: calc(50% - 1.5cm);
-  transform: translateY(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (min-width: 769px) {
+    position: absolute;
+    left: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 
   @media (max-width: 768px) {
     position: static;

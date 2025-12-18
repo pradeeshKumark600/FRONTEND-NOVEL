@@ -52,7 +52,7 @@
 .leftSection {
   display: flex;
   align-items: center;
-  gap: 1.75cm; // 1.75cm gap between hamburger and logo
+  gap: clamp(0.5rem, 2vw, 1.75rem); // Responsive gap between hamburger and logo
   flex-shrink: 0;
 }
 
@@ -367,7 +367,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-right: 2cm; // 2cm gap from right corner
+  margin-right: clamp(0.5rem, 3vw, 2rem); // Responsive gap from right corner
   flex-shrink: 0;
 }
 
